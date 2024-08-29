@@ -3,8 +3,8 @@
  * Main for Graph project (CS3114/CS5040 Fall 2023 Project 4).
  * Usage: java GraphProject <init-hash-size> <command-file>
  *
- * @author {Your Name Here}
- * @version {Put Something Here}
+ * @author Jett Morrow & Adam Schantz
+ * @version jettmorrow & adams03
  *
  */
 
@@ -34,7 +34,7 @@ public class GraphProject {
      */
     public static void main(String[] args) {
         // This is the main file for the program.
-        //HEY TRYNA GET THIS TO WORK
-        //hello my nmae is adam changed this file
+        // HEY TRYNA GET THIS TO WORK
+        // hello my nmae is adam changed this file
     }
 }

@@ -1,8 +1,8 @@
 /**
  * Hash table class
  *
- * @author <Put Something Here>
- * @version <Put Something Here>
+ * @author Jett Morrow & Adam Schantz
+ * @version jettmorrow & adams03
  */
 
 public class Hash {

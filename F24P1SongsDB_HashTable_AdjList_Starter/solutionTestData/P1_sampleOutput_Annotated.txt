@@ -1,0 +1,81 @@
+> Hash table size: 10
+> Unlike Project 1, the hash table size need not be a power of 2
+
+> remove song When Summer's Through
+|When Summer's Through| does not exist in the Song database.
+
+> print song
+total songs: 0
+
+> print artist
+total artists: 0
+
+> print graph
+There are 0 connected components
+The largest connected component has 0 elements
+
+> insert Blind Lemon Jefferson<SEP>Long Lonesome Blues
+|Blind Lemon Jefferson| is added to the Artist database.
+|Long Lonesome Blues| is added to the Song database.
+
+> insert Blind Lemon Jefferson<SEP>Long Lonesome Blues
+> Only the graph can know that this is a duplicate record
+|Blind Lemon Jefferson<SEP>Long Lonesome Blues| duplicates a record already in the database.
+
+> insert Blind Lemon Jefferson<SEP>Long   Lonesome Blues
+> Do not modify the string -- extra spaces make a different string
+|Long   Lonesome Blues| is added to the Song database.
+
+> insert Blind Lemon Jefferson<SEP>long Lonesome Blues
+> Case matters.
+|long Lonesome Blues| is added to the Song database.
+
+> insert Ma Rainey<SEP>Ma Rainey's Black Bottom
+|Ma Rainey| is added to the Artist database.
+|Ma Rainey's Black Bottom| is added to the Song database.
+
+> insert Ma Rainey<SEP>Long Lonesome Blues
+> This is not a duplicate -- this edge is not in the graph
+> But nothing is printed because no new record is added
+> to the hash table.
+
+
+> insert Ma Rainey<SEP>Mississippi Boweavil Blues
+|Mississippi Boweavil Blues| is added to the Song database.
+
+> insert Ma Rainey<SEP>Fixin' To Die Blues
+Song hash table size doubled.
+|Fixin' To Die Blues| is added to the Song database.
+
+> print artist
+0: |Blind Lemon Jefferson|
+7: |Ma Rainey|
+total artists: 2
+
+> print song
+1: |Fixin' To Die Blues|
+2: |Mississippi Boweavil Blues|
+7: |long Lonesome Blues|
+15: |Long Lonesome Blues|
+16: |Ma Rainey's Black Bottom|
+19: |Long   Lonesome Blues|
+total songs: 6
+
+> print graph
+There are 1 connected components
+The largest connected component has 8 elements
+
+> remove song Sleepy
+|Sleepy| does not exist in the Song database.
+
+> remove artist ma rainey
+> Case matters.
+|ma rainey| does not exist in the Artist database.
+
+> remove artist Ma Rainey
+|Ma Rainey| is removed from the Artist database.
+
+> print artist
+0: |Blind Lemon Jefferson|
+7: TOMBSTONE
+total artists: 1

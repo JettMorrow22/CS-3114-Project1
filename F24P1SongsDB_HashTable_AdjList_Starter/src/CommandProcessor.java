@@ -31,8 +31,11 @@ public class CommandProcessor implements Interpreter {
         Scanner oneLine,
         PrintWriter output,
         Scanner remainingInputLines) {
-        // TODO Auto-generated method stub
 
+        
+        //we first have to process the first word (insert, remove, print)
+        
+        //depending on first word they have dif following input
     }
 
 }

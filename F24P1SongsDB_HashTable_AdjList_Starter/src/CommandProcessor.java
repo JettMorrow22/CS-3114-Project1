@@ -9,11 +9,12 @@ public class CommandProcessor implements Interpreter {
 
     // commands are insert, remove, print
     private Controller controller;
-    
+
     public CommandProcessor(Controller c) {
         controller = c;
-        //hello this is adam
+        // hello this is adam
     }
+
 
     @Override
     public void interpretAllLines(Scanner input, PrintWriter output) {
@@ -33,51 +34,50 @@ public class CommandProcessor implements Interpreter {
         PrintWriter output,
         Scanner remainingInputLines) {
 
-        
-        //we first have to process the first word (insert, remove, print)
-        
-        //depending on first word they have dif following input
+        // we first have to process the first word (insert, remove, print)
+
+        // depending on first word they have dif following input
         String command = oneLine.next();
-        
+
         switch (command) {
-            case "insert": 
+            case "insert":
                 // insert {artist-name}<SEP>{song-name}
                 oneLine.useDelimiter("<SEP>");
                 String artist = oneLine.next();
                 String song = oneLine.next();
-                //Controller.insert(String artist, String song);
+                // Controller.insert(String artist, String song);
                 break;
             case "remove":
                 // remove {artist|song}{name}
                 String artistOrName = oneLine.next();
-                //captures the remainder of the line
+                // captures the remainder of the line
                 String name = oneLine.findInLine(".*");
                 switch (artistOrName) {
                     case "artist":
-                        //controller.removeArtist(name);
+                        // controller.removeArtist(name);
                         break;
                     case "song":
-                        //controller.removeSong(name);
+                        // controller.removeSong(name);
                         break;
                 }
                 break;
-                
+
             case "print":
                 // print {artist|song|graph}
                 switch (oneLine.next()) {
                     case "artist":
-                        //controller.printArtist(PrintWriter output);
+                        // controller.printArtist(PrintWriter output);
                         break;
                     case "song":
-                        //controller.printSong(PrintWriter output);
+                        // controller.printSong(PrintWriter output);
                         break;
                     case "graph":
-                        //controller.printGraph(PrintWriter output);
+                        // controller.printGraph(PrintWriter output);
                         break;
                 }
                 break;
             default:
-                //invalid command??
+                // invalid command??
                 break;
         }
     }

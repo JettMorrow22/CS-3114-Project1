@@ -36,7 +36,7 @@ public class Controller {
     
     private Hash artist;
     private Hash songs;
-    private Graph graph;
+
     
     public Controller(int hashSize) {
         artist = new Hash(hashSize);

@@ -1,4 +1,10 @@
 // -------------------------------------------------------------------------
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 /**
  * Main for Graph project (CS3114/CS5040 Fall 2023 Project 4).
  * Usage: java GraphProject <init-hash-size> <command-file>
@@ -29,13 +35,51 @@
 
 public class GraphProject {
     /**
+     * The main program Entry point, Initializes CP with Controller to call
+     * methods on
+     * 
      * @param args
-     *            Command line parameters
+     *            Command line parameters {HashTableSize} {Command File}
+     * 
      */
     public static void main(String[] args) {
-        // This is the main file for the program.
-        // HEY TRYNA GET THIS TO WORK
-        // hello my nmae is adam changed this file
+
+        // input should be {HashTableSize} {Command File}
+        if (args.length != 2) {
+            throw new IllegalArgumentException(
+                "Expected exactly 2 argument: {HashTableSize} {Command File}");
+        }
+
+        // check if hashTableSize is int and >= 1
+        int hashTableSize;
+        try {
+            hashTableSize = Integer.parseInt(args[0]);
+
+            if (hashTableSize < 1) {
+                throw new IllegalArgumentException(
+                    "{HashTableSize} must be >= 1");
+            }
+        }
+        catch (NumberFormatException e) {
+            throw new NumberFormatException(
+                "{HashTableSize} must be a number >= 1");
+        }
+
+        // set up input Stream
+        try (Scanner fileInput = new Scanner(new File(args[1]))) {
+            // set up the output stream
+            PrintWriter stdout = new PrintWriter(System.out);
+
+            // create the Controller & interpreter
+            Controller controller = new Controller(hashTableSize);
+            CommandProcessor interpreter = new CommandProcessor(controller);
+
+            // process all the commands in the input file
+            interpreter.interpretAllLines(fileInput, stdout);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // initalize controller and commandProcessor with the file
 

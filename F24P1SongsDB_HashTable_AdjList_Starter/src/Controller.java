@@ -37,5 +37,10 @@ public class Controller {
     private Hash songs;
     private Graph graph;
     
+    public Controller(int hashSize) {
+        artist = new Hash(hashSize);
+        songs = new Hash(hashSize);
+    }
+    
     //create methods for everything, insert, delete, print
 }

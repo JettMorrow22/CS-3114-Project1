@@ -12,6 +12,7 @@ public class CommandProcessor implements Interpreter {
     
     public CommandProcessor(Controller c) {
         controller = c;
+        //hello this is adam
     }
 
     @Override

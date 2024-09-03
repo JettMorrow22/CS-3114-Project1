@@ -5,6 +5,7 @@
 Thumbs.db
 /bin/
 *.class
+*.project
 *.jar
 *.war
 *.ear

@@ -96,6 +96,9 @@ public class Hash {
 
 
     public void reSizeRecords() {
+        //create new records array, double size, rehasheverything
+        //reset tombstones, update cap, and update size
+        
         // create new records array
         Record[] newRecords = new Record[tableCap * 2];
 

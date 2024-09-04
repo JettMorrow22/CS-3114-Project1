@@ -34,13 +34,17 @@ public class Controller {
 //    component.
     
     
-    private Hash artist;
+    private Hash artists;
     private Hash songs;
 
     
     public Controller(int hashSize) {
-        artist = new Hash(hashSize);
+        artists = new Hash(hashSize);
         songs = new Hash(hashSize);
+    }
+    
+    public void insert(String artist, String song) {
+        //insert artist in artists & song in songs
     }
     
     //create methods for everything, insert, delete, print

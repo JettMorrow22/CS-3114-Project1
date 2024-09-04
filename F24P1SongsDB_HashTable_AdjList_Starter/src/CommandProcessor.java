@@ -9,6 +9,14 @@ public class CommandProcessor implements Interpreter {
 
     // commands are insert, remove, print
     private Controller controller;
+    
+    //I have to print in this file
+    //print |name| is added to blank when we add sometihng to a hashTable
+    //print if we double size of hash
+    
+    
+    //remove
+    //print if key is found and removed or not found
 
     public CommandProcessor(Controller c) {
         controller = c;
@@ -35,7 +43,6 @@ public class CommandProcessor implements Interpreter {
         Scanner remainingInputLines) {
 
         // we first have to process the first word (insert, remove, print)
-
         // depending on first word they have dif following input
         String command = oneLine.next();
 

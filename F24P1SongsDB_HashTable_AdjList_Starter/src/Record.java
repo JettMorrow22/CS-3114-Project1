@@ -1,10 +1,15 @@
 
 public class Record {
 
-    // the key will be the number from the sfold hash with string
+    //key will be the artist/song
     private String key;
 
+    public Record(String k) {
+        key = k;
+    }
+    
     public String getKey() {
         return key;
     }
+    
 }

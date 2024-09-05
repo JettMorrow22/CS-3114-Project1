@@ -9,14 +9,13 @@ public class CommandProcessor implements Interpreter {
 
     // commands are insert, remove, print
     private Controller controller;
-    
-    //I have to print in this file
-    //print |name| is added to blank when we add sometihng to a hashTable
-    //print if we double size of hash
-    
-    
-    //remove
-    //print if key is found and removed or not found
+
+    // I have to print in this file
+    // print |name| is added to blank when we add sometihng to a hashTable
+    // print if we double size of hash
+
+    // remove
+    // print if key is found and removed or not found
 
     public CommandProcessor(Controller c) {
         controller = c;
@@ -36,6 +35,8 @@ public class CommandProcessor implements Interpreter {
     }
 
 
+    // this is where I have to print to output
+    // ---------------------------------------------------------------
     @Override
     public void interpretLine(
         Scanner oneLine,
@@ -52,7 +53,12 @@ public class CommandProcessor implements Interpreter {
                 oneLine.useDelimiter("<SEP>");
                 String artist = oneLine.next();
                 String song = oneLine.next();
-                // Controller.insert(String artist, String song);
+                
+                //how do I determine if the key was added or if the hash doubles in size
+                //pass it to the controller and the hash to print
+                //maybe pass it just to controller
+                //Controller.insertArtist(String artist);
+                //Controller.insertSong(String song);
                 break;
             case "remove":
                 // remove {artist|song}{name}

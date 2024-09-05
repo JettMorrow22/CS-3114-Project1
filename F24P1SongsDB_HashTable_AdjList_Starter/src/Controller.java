@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 
 public class Controller {
     //main class that has hashs and graphs
@@ -43,8 +44,22 @@ public class Controller {
         songs = new Hash(hashSize);
     }
     
-    public void insert(String artist, String song) {
+    public void insert(PrintWriter output, String artist, String song) {
         //insert artist in artists & song in songs
+        if (artists.insert(artist)) {
+            
+        } 
+        else { 
+            
+        }
+           
+        
+        if (songs.insert(song)) {
+            
+        }
+        else {
+            
+        }
     }
     
     //create methods for everything, insert, delete, print

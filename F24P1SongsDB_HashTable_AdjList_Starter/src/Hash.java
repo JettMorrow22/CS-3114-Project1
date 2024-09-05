@@ -10,13 +10,13 @@ public class Hash {
     private Record[] records;
     private int tableCap;
     private int tableSize;
-    private Record tombstone;
+    private Record TOMBSTONE;
 
     public Hash(int hashSize) {
         records = new Record[hashSize];
         tableCap = hashSize;
         tableSize = 0;
-        tombstone = new Record("TOMBSTONE");
+        TOMBSTONE = new Record("TOMBSTONE");
     }
 
     // needs methods
@@ -32,41 +32,43 @@ public class Hash {
     // my idea of a tombstone is, remove a record in records, by placing the
     // tombstone record in its place
 
-    //print |songname| is added to the Artist database.
-    public void insert(String key) {
 
-        // check if we need to double records size
+    // print |songname| is added to the Artist database.
+    public boolean insert(String key) {
+
+        // check if we need to double records size then add it
         if (tableSize + 1 >= tableCap / 2) {
             reSizeRecords();
         }
 
-        // if not add it to records
         int index = h(key, tableCap);
         int i = 1;
+
         // find empty position
         // either index is empty, tombstone, cur Key, or random key
-
         while (records[index] != null) {
+
             // if we find tombstone remember it and check for dup
-            if (records[index].getKey().equals("TOMBSTONE")) {
-                //key is not in the hash table so add it
+            if (records[index] == TOMBSTONE) {
+                // if no dup then break and add it
                 if (find(key) == null) {
                     break;
                 }
                 else {
-                    //key already exists
-                    return;
+                    // dup return false
+                    return false;
                 }
             }
 
-            // quadratic prob;
+            // quadratic prob
             index += Math.pow(i, 2) % tableCap;
             i++;
         }
-        
-        //add the key to table and increment size
+
+        // add the key to table and increment size
         records[index] = new Record(key);
         tableSize++;
+        return true;
     }
 
 
@@ -95,19 +97,38 @@ public class Hash {
     }
 
 
+    /**
+     * method to double the size of records to decrease collision
+     * rehashes all valid records and disregards tombstones
+     */
     public void reSizeRecords() {
-        //create new records array, double size, rehasheverything
-        //reset tombstones, update cap, and update size
-        
+        // create new records array, double size, rehasheverything
+        // reset tombstones, update cap, and update size
+
         // create new records array
         Record[] newRecords = new Record[tableCap * 2];
 
         // rehash all records, except tombstons from records into newRecords
         for (Record r : records) {
             // if tombstone or empty skip it
+            if (r == null || r == TOMBSTONE) {
+                continue;
+            }
 
             // if valid key, rehash and place in newRecords
+            int home = h(r.getKey(), tableCap * 2);
+            int i = 1;
+            while (newRecords[home] != null) {
+                home += Math.pow(i, 2) % (tableCap * 2);
+                i++;
+            }
+
+            newRecords[home] = new Record(r.getKey());
         }
+
+        // update records and tableCap
+        records = newRecords;
+        tableCap = tableCap * 2;
     }
 
     // remove

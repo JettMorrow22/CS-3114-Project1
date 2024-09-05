@@ -33,8 +33,13 @@ public class Hash {
     // tombstone record in its place
 
 
-    // print |songname| is added to the Artist database.
-    // returns true is there was a valid insert, false if not
+    /**
+     * Attempts to insert key into the hash table
+     * 
+     * @param key
+     *            the key to be added
+     * @return true if key was added, false if not
+     */
     public boolean insert(String key) {
 
         int home = h(key, tableCap);
@@ -224,16 +229,31 @@ public class Hash {
     }
 
 
+    /**
+     * basic getter for records
+     * 
+     * @return records
+     */
     public Record[] getRecords() {
         return records;
     }
 
 
+    /**
+     * basic getter for tableCap
+     * 
+     * @return tableCap
+     */
     public int getTableCap() {
         return tableCap;
     }
 
 
+    /**
+     * basic getter for tableSize
+     * 
+     * @return tableSize
+     */
     public int getTableSize() {
         return tableSize;
     }

@@ -1,6 +1,14 @@
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * CommandProcessor class that implements Interpreter
+ * CP reads lines from the input file and calls appriopriate method on
+ * Controller
+ * 
+ * @author Jett Morrow & Adam Schantz
+ * @version jettmorrow & adams03
+ */
 public class CommandProcessor implements Interpreter {
 
     // implement interpreter
@@ -17,11 +25,25 @@ public class CommandProcessor implements Interpreter {
     // remove
     // print if key is found and removed or not found
 
+    /**
+     * General constructor for CP
+     * 
+     * @param c
+     *            the controller
+     */
     public CommandProcessor(Controller c) {
         controller = c;
     }
 
 
+    /**
+     * method to interprete one line at a time
+     * 
+     * @param input
+     *            the scanner
+     * @param output
+     *            the output
+     */
     @Override
     public void interpretAllLines(Scanner input, PrintWriter output) {
         while (input.hasNextLine()) {
@@ -34,9 +56,19 @@ public class CommandProcessor implements Interpreter {
     }
 
 
-    // this is where I have to print to output
-    //the controller method actually print to the output
-    // ---------------------------------------------------------------
+    /**
+     * Where each line is procesessed
+     * the first word determines the main command which determines what the next
+     * possible words could be and mean, all input is send to controller with
+     * approiorate methods
+     * 
+     * @param oneLine
+     *            scanner object
+     * @param output
+     *            our output function
+     * @param remainingInputLines
+     *            the remainder of the input file
+     */
     @Override
     public void interpretLine(
         Scanner oneLine,

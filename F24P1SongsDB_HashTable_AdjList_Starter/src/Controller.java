@@ -73,6 +73,24 @@ public class Controller {
 
     }
     
+    public void removeArtist(PrintWriter output, String artist) {
+        if (artists.remove(artist)) {
+            output.println("| " + artist + "| is removed from the Artist database.");
+        }
+        else {
+            output.println("|" + artist +"| does not exist in the Artist database.");
+        }
+    }
+    
+    public void removeSong(PrintWriter output, String song) {
+        if (songs.remove(song)) {
+            output.println("| " + song + "| is removed from the Song database.");
+        }
+        else {
+            output.println("|" + song +"| does not exist in the Song database.");
+        }
+    }
+    
     public void printArtist(PrintWriter output) {
         String[] res = artists.print();
         

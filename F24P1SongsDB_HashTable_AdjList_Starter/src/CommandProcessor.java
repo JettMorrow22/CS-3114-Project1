@@ -35,6 +35,7 @@ public class CommandProcessor implements Interpreter {
 
 
     // this is where I have to print to output
+    //the controller method actually print to the output
     // ---------------------------------------------------------------
     @Override
     public void interpretLine(
@@ -61,10 +62,10 @@ public class CommandProcessor implements Interpreter {
                 String name = oneLine.findInLine(".*");
                 switch (artistOrName) {
                     case "artist":
-                        // controller.removeArtist(name);
+                        controller.removeArtist(output, name);
                         break;
                     case "song":
-                        // controller.removeSong(name);
+                        controller.removeSong(output, name);
                         break;
                 }
                 break;
@@ -78,13 +79,10 @@ public class CommandProcessor implements Interpreter {
                     case "song":
                         controller.printSong(output);
                         break;
-                    case "graph":
-                        // controller.printGraph(PrintWriter output);
-                        break;
+// case "graph":
+// // controller.printGraph(PrintWriter output);
+// break;
                 }
-                break;
-            default:
-                // invalid command??
                 break;
         }
     }

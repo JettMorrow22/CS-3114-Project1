@@ -34,22 +34,18 @@ public class Hash {
 
 
     // print |songname| is added to the Artist database.
+    // returns true is there was a valid insert, false if not
     public boolean insert(String key) {
 
-        // check if we need to double records size then add it
-        if (tableSize + 1 >= tableCap / 2) {
-            reSizeRecords();
-        }
-
-        int index = h(key, tableCap);
+        int home = h(key, tableCap);
         int i = 1;
 
         // find empty position
         // either index is empty, tombstone, cur Key, or random key
-        while (records[index] != null) {
+        while (records[home] != null) {
 
             // if we find tombstone remember it and check for dup
-            if (records[index] == TOMBSTONE) {
+            if (records[home] == TOMBSTONE) {
                 // if no dup then break and add it
                 if (find(key) == null) {
                     break;
@@ -61,12 +57,12 @@ public class Hash {
             }
 
             // quadratic prob
-            index += Math.pow(i, 2) % tableCap;
+            home = (home + i * i) % tableCap;
             i++;
         }
 
         // add the key to table and increment size
-        records[index] = new Record(key);
+        records[home] = new Record(key);
         tableSize++;
         return true;
     }
@@ -88,12 +84,28 @@ public class Hash {
                 return records[home];
             }
 
-            home += Math.pow(i, 2) % tableCap;
+            home = (home + i * i) % tableCap;
             i++;
         }
 
         // was never found
         return null;
+    }
+
+
+    /**
+     * method to determine if the table needs resizing before an insertion
+     * 
+     * @return true if it needs to be resized and gets resized false if not
+     */
+    public boolean checkAndResize() {
+        // check if we need to double records size then add it
+        if (tableSize + 1 >= tableCap / 2) {
+            reSizeRecords();
+            return true;
+        }
+        return false;
+
     }
 
 
@@ -119,7 +131,7 @@ public class Hash {
             int home = h(r.getKey(), tableCap * 2);
             int i = 1;
             while (newRecords[home] != null) {
-                home += Math.pow(i, 2) % (tableCap * 2);
+                home = (home + i * i) % (tableCap * 2);
                 i++;
             }
 
@@ -131,8 +143,53 @@ public class Hash {
         tableCap = tableCap * 2;
     }
 
-    // remove
-    // print
+
+    /**
+     * this method attempts to remove key from the hashTable
+     * if found it replaces the record with TOMBSTONE and return true
+     * if not return false
+     * 
+     * @param key
+     *            the key to be searching for
+     * @return true if key is removed false if not
+     */
+    public boolean remove(String key) {
+        // search for key in table, if it exists remove it
+        int home = h(key, tableCap);
+        int i = 1;
+        while (records[home] != null) {
+            if (records[home].getKey().equals(key)) {
+                records[home] = TOMBSTONE;
+                tableSize--;
+                return true;
+            }
+            home = (home + i * i) % tableCap;
+            i++;
+        }
+        return false;
+    }
+
+
+    /**
+     * Print method, prints each non null record as the index of their array
+     * then the key
+     * 
+     * @return String[] to represent each record
+     */
+    public String[] print() {
+        String[] res = new String[tableSize];
+        int index = 0;
+
+        for (int x = 0; x < tableCap; x++) {
+            if (records[x] == null || records[x] == TOMBSTONE)
+                continue;
+            String line = x + ": |" + records[x].getKey() + "|";
+            res[index] = line;
+            index++;
+        }
+
+        return res;
+    }
 
 
     /**

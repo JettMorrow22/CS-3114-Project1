@@ -19,7 +19,6 @@ public class CommandProcessor implements Interpreter {
 
     public CommandProcessor(Controller c) {
         controller = c;
-        // hello this is adam
     }
 
 
@@ -53,12 +52,7 @@ public class CommandProcessor implements Interpreter {
                 oneLine.useDelimiter("<SEP>");
                 String artist = oneLine.next();
                 String song = oneLine.next();
-                
-                //how do I determine if the key was added or if the hash doubles in size
-                //pass it to the controller and the hash to print
-                //maybe pass it just to controller
-                //Controller.insertArtist(String artist);
-                //Controller.insertSong(String song);
+                controller.insert(output, artist, song);
                 break;
             case "remove":
                 // remove {artist|song}{name}
@@ -79,10 +73,10 @@ public class CommandProcessor implements Interpreter {
                 // print {artist|song|graph}
                 switch (oneLine.next()) {
                     case "artist":
-                        // controller.printArtist(PrintWriter output);
+                        controller.printArtist(output);
                         break;
                     case "song":
-                        // controller.printSong(PrintWriter output);
+                        controller.printSong(output);
                         break;
                     case "graph":
                         // controller.printGraph(PrintWriter output);

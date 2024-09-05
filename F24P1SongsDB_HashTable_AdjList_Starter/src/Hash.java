@@ -38,14 +38,15 @@ public class Hash {
     public boolean insert(String key) {
 
         int home = h(key, tableCap);
+        int index = home;
         int i = 1;
 
         // find empty position
         // either index is empty, tombstone, cur Key, or random key
-        while (records[home] != null) {
+        while (records[index] != null) {
 
             // if we find tombstone remember it and check for dup
-            if (records[home] == TOMBSTONE) {
+            if (records[index] == TOMBSTONE) {
                 // if no dup then break and add it
                 if (find(key) == null) {
                     break;
@@ -55,14 +56,18 @@ public class Hash {
                     return false;
                 }
             }
+            else if (records[index].getKey().equals(key)) {
+                // we at a duplicate
+                return false;
+            }
 
             // quadratic prob
-            home = (home + i * i) % tableCap;
+            index = (home + i * i) % tableCap;
             i++;
         }
 
         // add the key to table and increment size
-        records[home] = new Record(key);
+        records[index] = new Record(key);
         tableSize++;
         return true;
     }
@@ -77,14 +82,15 @@ public class Hash {
      */
     public Record find(String key) {
         int home = h(key, tableCap);
+        int index = home;
         int i = 1;
 
-        while (records[home] != null) {
-            if (records[home].getKey().equals(key)) {
-                return records[home];
+        while (records[index] != null) {
+            if (records[index].getKey().equals(key)) {
+                return records[index];
             }
 
-            home = (home + i * i) % tableCap;
+            index = (home + i * i) % tableCap;
             i++;
         }
 
@@ -95,52 +101,43 @@ public class Hash {
 
     /**
      * method to determine if the table needs resizing before an insertion
+     * if so it doubles the cap and rehashes everything except TOMBSTONE and
+     * null
      * 
      * @return true if it needs to be resized and gets resized false if not
      */
     public boolean checkAndResize() {
         // check if we need to double records size then add it
         if (tableSize + 1 >= tableCap / 2) {
-            reSizeRecords();
+            // create new records array
+            Record[] newRecords = new Record[tableCap * 2];
+
+            // rehash all records, except tombstons from records into newRecords
+            for (Record r : records) {
+                // if tombstone or empty skip it
+                if (r == null || r == TOMBSTONE) {
+                    continue;
+                }
+
+                // if valid key, rehash and place in newRecords
+                int home = h(r.getKey(), tableCap * 2);
+                int index = home;
+                int i = 1;
+                while (newRecords[index] != null) {
+                    index = (home + i * i) % (tableCap * 2);
+                    i++;
+                }
+
+                newRecords[index] = new Record(r.getKey());
+            }
+
+            // update records and tableCap
+            records = newRecords;
+            tableCap = tableCap * 2;
             return true;
         }
         return false;
 
-    }
-
-
-    /**
-     * method to double the size of records to decrease collision
-     * rehashes all valid records and disregards tombstones
-     */
-    public void reSizeRecords() {
-        // create new records array, double size, rehasheverything
-        // reset tombstones, update cap, and update size
-
-        // create new records array
-        Record[] newRecords = new Record[tableCap * 2];
-
-        // rehash all records, except tombstons from records into newRecords
-        for (Record r : records) {
-            // if tombstone or empty skip it
-            if (r == null || r == TOMBSTONE) {
-                continue;
-            }
-
-            // if valid key, rehash and place in newRecords
-            int home = h(r.getKey(), tableCap * 2);
-            int i = 1;
-            while (newRecords[home] != null) {
-                home = (home + i * i) % (tableCap * 2);
-                i++;
-            }
-
-            newRecords[home] = new Record(r.getKey());
-        }
-
-        // update records and tableCap
-        records = newRecords;
-        tableCap = tableCap * 2;
     }
 
 
@@ -156,14 +153,15 @@ public class Hash {
     public boolean remove(String key) {
         // search for key in table, if it exists remove it
         int home = h(key, tableCap);
+        int index = home;
         int i = 1;
-        while (records[home] != null) {
-            if (records[home].getKey().equals(key)) {
-                records[home] = TOMBSTONE;
+        while (records[index] != null) {
+            if (records[index].getKey().equals(key)) {
+                records[index] = TOMBSTONE;
                 tableSize--;
                 return true;
             }
-            home = (home + i * i) % tableCap;
+            index = (home + i * i) % tableCap;
             i++;
         }
         return false;
@@ -223,5 +221,20 @@ public class Hash {
         }
 
         return (int)(Math.abs(sum) % length);
+    }
+
+
+    public Record[] getRecords() {
+        return records;
+    }
+
+
+    public int getTableCap() {
+        return tableCap;
+    }
+
+
+    public int getTableSize() {
+        return tableSize;
     }
 }

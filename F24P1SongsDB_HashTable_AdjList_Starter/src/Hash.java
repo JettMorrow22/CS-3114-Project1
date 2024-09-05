@@ -10,13 +10,20 @@ public class Hash {
     private Record[] records;
     private int tableCap;
     private int tableSize;
-    private Record TOMBSTONE;
+    private Record tombstone;
 
+    /**
+     * Constructor for hash
+     * inializes teh Record[] with param size and tableCap and tableSize
+     * 
+     * @param hashSize
+     *            the length of the Record[]
+     */
     public Hash(int hashSize) {
         records = new Record[hashSize];
         tableCap = hashSize;
         tableSize = 0;
-        TOMBSTONE = new Record("TOMBSTONE");
+        tombstone = new Record("TOMBSTONE");
     }
 
     // needs methods
@@ -51,7 +58,7 @@ public class Hash {
         while (records[index] != null) {
 
             // if we find tombstone remember it and check for dup
-            if (records[index] == TOMBSTONE) {
+            if (records[index] == tombstone) {
                 // if no dup then break and add it
                 if (find(key) == null) {
                     break;
@@ -120,7 +127,7 @@ public class Hash {
             // rehash all records, except tombstons from records into newRecords
             for (Record r : records) {
                 // if tombstone or empty skip it
-                if (r == null || r == TOMBSTONE) {
+                if (r == null || r == tombstone) {
                     continue;
                 }
 
@@ -162,7 +169,7 @@ public class Hash {
         int i = 1;
         while (records[index] != null) {
             if (records[index].getKey().equals(key)) {
-                records[index] = TOMBSTONE;
+                records[index] = tombstone;
                 tableSize--;
                 return true;
             }
@@ -184,7 +191,7 @@ public class Hash {
         int index = 0;
 
         for (int x = 0; x < tableCap; x++) {
-            if (records[x] == null || records[x] == TOMBSTONE)
+            if (records[x] == null || records[x] == tombstone)
                 continue;
             String line = x + ": |" + records[x].getKey() + "|";
             res[index] = line;

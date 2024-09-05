@@ -43,8 +43,7 @@ public class GraphProject {
      * 
      */
     public static void main(String[] args) {
-
-        // input should be {HashTableSize} {Command File}
+        // input should be {HashTableSize} {Command File} 
         if (args.length != 2) {
             throw new IllegalArgumentException(
                 "Expected exactly 2 argument: {HashTableSize} {Command File}");
@@ -65,6 +64,7 @@ public class GraphProject {
                 "{HashTableSize} must be a number >= 1");
         }
 
+
         // set up input Stream
         try (Scanner fileInput = new Scanner(new File(args[1]))) {
             // set up the output stream
@@ -73,6 +73,7 @@ public class GraphProject {
             // create the Controller & interpreter
             Controller controller = new Controller(hashTableSize);
             CommandProcessor interpreter = new CommandProcessor(controller);
+
 
             // process all the commands in the input file
             interpreter.interpretAllLines(fileInput, stdout);

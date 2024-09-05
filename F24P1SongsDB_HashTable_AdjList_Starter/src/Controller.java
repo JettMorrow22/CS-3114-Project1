@@ -57,6 +57,7 @@ public class Controller {
      * initializes the two hashes and the graph
      * 
      * @param hashSize
+     *            the length of the hashTable
      */
     public Controller(int hashSize) {
         artists = new Hash(hashSize);
@@ -84,19 +85,23 @@ public class Controller {
         // this for artists
         if (artists.checkAndResize()) {
             output.println("Artist hash table size doubled.");
+            output.flush();
         }
         if (artists.insert(artist)) {
             output.println("|" + artist + "|"
                 + " is added to the Artist database.");
+            output.flush();
         }
 
         // this for the songs
-        if (artists.checkAndResize()) {
-            output.println("Artist hash table size doubled.");
+        if (songs.checkAndResize()) {
+            output.println("Song hash table size doubled.");
+            output.flush();
         }
-        if (artists.insert(artist)) {
-            output.println("|" + artist + "|"
-                + " is added to the Artist database.");
+        if (songs.insert(song)) {
+            output.println("|" + song + "|"
+                + " is added to the Song database.");
+            output.flush();
         }
 
     }
@@ -120,6 +125,7 @@ public class Controller {
             output.println("|" + artist
                 + "| does not exist in the Artist database.");
         }
+        output.flush();
     }
 
 
@@ -141,6 +147,7 @@ public class Controller {
             output.println("|" + song
                 + "| does not exist in the Song database.");
         }
+        output.flush();
     }
 
 
@@ -158,6 +165,7 @@ public class Controller {
         }
 
         output.println("total artists: " + res.length);
+        output.flush();
     }
 
 
@@ -175,6 +183,7 @@ public class Controller {
         }
 
         output.println("total songs: " + res.length);
+        output.flush();
     }
 
     // create methods for everything, insert, delete, print

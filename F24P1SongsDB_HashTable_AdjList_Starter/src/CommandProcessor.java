@@ -53,6 +53,7 @@ public class CommandProcessor implements Interpreter {
                 this.interpretLine(new Scanner(line), output, input);
             }
         }
+        output.close();
     }
 
 
@@ -117,6 +118,7 @@ public class CommandProcessor implements Interpreter {
                 }
                 break;
         }
+        output.flush();
     }
 
 }

@@ -86,7 +86,7 @@ public class Hash {
 
 
     /**
-     * Find function to determine if a key value is in the hashtabl
+     * Find function to determine if a key value is in the hashtable
      * 
      * @param key
      *            takes in a key value to search the hash
@@ -187,15 +187,22 @@ public class Hash {
      * @return String[] to represent each record
      */
     public String[] print() {
-        String[] res = new String[tableSize];
-        int index = 0;
+        // account for tombstones
+        String[] res = new String[tableCap];
 
         for (int x = 0; x < tableCap; x++) {
-            if (records[x] == null || records[x] == tombstone)
+            String line = "";
+
+            if (records[x] == null) {
                 continue;
-            String line = x + ": |" + records[x].getKey() + "|";
-            res[index] = line;
-            index++;
+            }
+            else if (records[x] == tombstone) {
+                line += x + ": TOMBSTONE";
+            }
+            else {
+                line += x + ": |" + records[x].getKey() + "|";
+            }
+            res[x] = line;
         }
 
         return res;

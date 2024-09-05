@@ -118,7 +118,7 @@ public class Controller {
      */
     public void removeArtist(PrintWriter output, String artist) {
         if (artists.remove(artist)) {
-            output.println("| " + artist
+            output.println("|" + artist
                 + "| is removed from the Artist database.");
         }
         else {
@@ -140,7 +140,7 @@ public class Controller {
      */
     public void removeSong(PrintWriter output, String song) {
         if (songs.remove(song)) {
-            output.println("| " + song
+            output.println("|" + song
                 + "| is removed from the Song database.");
         }
         else {
@@ -161,10 +161,12 @@ public class Controller {
         String[] res = artists.print();
 
         for (String s : res) {
+            //skip empty strings
+            if (s == null) continue;
             output.println(s);
         }
 
-        output.println("total artists: " + res.length);
+        output.println("total artists: " + artists.getTableSize());
         output.flush();
     }
 
@@ -177,12 +179,13 @@ public class Controller {
      */
     public void printSong(PrintWriter output) {
         String[] res = songs.print();
-
+        
         for (String s : res) {
+            if (s == null) continue;
             output.println(s);
         }
 
-        output.println("total songs: " + res.length);
+        output.println("total songs: " + songs.getTableSize());
         output.flush();
     }
 

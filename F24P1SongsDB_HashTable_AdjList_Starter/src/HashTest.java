@@ -221,6 +221,32 @@ public class HashTest extends TestCase {
 
 
     /**
+     * method to test the Print method
+     * 
+     * @throws Exception
+     *             exception
+     */
+    public void testPrint() throws Exception {
+        // check it returns valid strings
+        hashTable.insert("Jett Morrow"); // should be index 0
+        hashTable.insert("Adam"); // should be index 1
+        hashTable.insert("Adamasa"); // should be index 0, so prob to 1, then
+                                     // prob to 4
+        hashTable.remove("Adam");
+
+        String one = "0: |Jett Morrow|";
+        String two = "1: TOMBSTONE";
+        String three = "4: |Adamasa|";
+
+        String[] res = hashTable.print();
+        assertTrue(one.equals(res[0]));
+        assertTrue(two.equals(res[1]));
+        assertTrue(three.equals(res[4]));
+
+    }
+
+
+    /**
      * Check out the sfold method
      *
      * @throws Exception

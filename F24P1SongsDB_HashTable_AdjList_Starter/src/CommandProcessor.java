@@ -6,6 +6,8 @@ import java.util.Scanner;
  * CP reads lines from the input file and calls appriopriate method on
  * Controller
  * 
+ * We got InterpretAllLines from OPENDSA 2.7
+ * 
  * @author Jett Morrow & Adam Schantz
  * @version jettmorrow & adams03
  */
@@ -84,15 +86,15 @@ public class CommandProcessor implements Interpreter {
             case "insert":
                 // insert {artist-name}<SEP>{song-name}
                 oneLine.useDelimiter("<SEP>");
-                String artist = oneLine.next();
-                String song = oneLine.next();
+                String artist = oneLine.next().trim();
+                String song = oneLine.next().trim();
                 controller.insert(output, artist, song);
                 break;
             case "remove":
                 // remove {artist|song}{name}
                 String artistOrName = oneLine.next();
                 // captures the remainder of the line
-                String name = oneLine.findInLine(".*");
+                String name = oneLine.nextLine().trim();
                 switch (artistOrName) {
                     case "artist":
                         controller.removeArtist(output, name);

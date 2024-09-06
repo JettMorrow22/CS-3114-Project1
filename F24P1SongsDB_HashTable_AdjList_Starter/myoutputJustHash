@@ -7,8 +7,8 @@ total artists: 0
 |long Lonesome Blues| is added to the Song database.
 |Ma Rainey| is added to the Artist database.
 |Ma Rainey's Black Bottom| is added to the Song database.
-Song hash table size doubled.
 |Mississippi Boweavil Blues| is added to the Song database.
+Song hash table size doubled.
 |Fixin' To Die Blues| is added to the Song database.
 0: |Blind Lemon Jefferson|
 7: |Ma Rainey|
@@ -22,7 +22,7 @@ total artists: 2
 total songs: 6
 |Sleepy| does not exist in the Song database.
 |ma rainey| does not exist in the Artist database.
-| Ma Rainey| is removed from the Artist database.
+|Ma Rainey| is removed from the Artist database.
 0: |Blind Lemon Jefferson|
 7: TOMBSTONE
 total artists: 1

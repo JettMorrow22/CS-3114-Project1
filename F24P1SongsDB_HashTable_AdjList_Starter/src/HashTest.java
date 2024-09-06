@@ -151,24 +151,35 @@ public class HashTest extends TestCase {
         hashTable.insert("Jett Morrow"); // should be index 0
         hashTable.insert("Adam"); // should be index 1
         hashTable.insert("Adamasa"); // home = 0, index 4
-        hashTable.insert("JENNA");
-
+        
         // add some tombstones
-        hashTable.remove("JENNA"); 
+        hashTable.insert("JENNA");
+        hashTable.remove("JENNA"); //TOMBSTONE @ 9
 
         // add records that will have to probe when rehashed
-        hashTable.insert("Jettt wasd"); // should go to 1 on both
-        hashTable.remove("Jettt wasd");
-        hashTable.insert("JENNA KANTOWSKI");
+        hashTable.insert("Jettt wasd"); //home 1, prob 2
+        hashTable.remove("Jettt wasd"); //TOMBSTONE @ 2
+        
+        hashTable.insert("JENNA KANTOWSKI"); //home 0, prob 1, prob 4, prob 9
+                                             //add 9
+       
+        assertFalse(hashTable.checkAndResize());
+        assertTrue(hashTable.getRecords()[0].getKey().equals("Jett Morrow"));
+        assertTrue(hashTable.getRecords()[1].getKey().equals("Adam"));
+        assertTrue(hashTable.getRecords()[4].getKey().equals("Adamasa"));
+        assertTrue(hashTable.getRecords()[9].getKey().equals(
+            "JENNA KANTOWSKI"));
+        
+        
+        //check resizing with tombstones
+        hashTable.insert("Hello"); //index 5
         hashTable.checkAndResize();
-        
-        
         assertTrue(hashTable.getRecords()[0].getKey().equals("Jett Morrow"));
         assertTrue(hashTable.getRecords()[1].getKey().equals("Adam"));
         assertTrue(hashTable.getRecords()[10].getKey().equals("Adamasa"));
-        assertTrue(hashTable.getRecords()[2].getKey().equals("Jettt wasd"));
         assertTrue(hashTable.getRecords()[4].getKey().equals(
             "JENNA KANTOWSKI"));
+        assertTrue(hashTable.getRecords()[15].getKey().equals("Hello"));
     }
 
 

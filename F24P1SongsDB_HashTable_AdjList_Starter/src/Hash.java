@@ -120,14 +120,18 @@ public class Hash {
      */
     public boolean checkAndResize() {
         // check if we need to double records size then add it
-        if (tableSize + 1 >= tableCap / 2) {
+        if (tableSize >= tableCap / 2) {
             // create new records array
             Record[] newRecords = new Record[tableCap * 2];
 
             // rehash all records, except tombstons from records into newRecords
             for (Record r : records) {
                 // if tombstone or empty skip it
-                if (r == null || r == tombstone) {
+                if (r == null) {
+                    continue;
+                }
+                
+                if (r == tombstone) {
                     continue;
                 }
 

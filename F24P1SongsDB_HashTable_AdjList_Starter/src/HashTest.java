@@ -18,6 +18,28 @@ public class HashTest extends TestCase {
 
 
     /**
+     * method to test the quadratic probing with loop around
+     * 
+     * @throws Exception
+     *             exception
+     */
+    public void testCollision() throws Exception {
+        hashTable.insert("zerof"); // all these index 0
+        hashTable.insert("Jett Morrow"); // all these index 0
+        hashTable.insert("Jett t");
+        hashTable.insert("Jett t6raoewqah");
+        hashTable.insert("Adamasa");
+
+        assertTrue(hashTable.getRecords()[0].getKey().equals("zerof"));
+        assertTrue(hashTable.getRecords()[1].getKey().equals("Jett Morrow"));
+        assertTrue(hashTable.getRecords()[4].getKey().equals("Jett t"));
+        assertTrue(hashTable.getRecords()[9].getKey().equals(
+            "Jett t6raoewqah"));
+        assertTrue(hashTable.getRecords()[6].getKey().equals("Adamasa"));
+    }
+
+
+    /**
      * Test cases for insert method
      * 
      * @throws Exception
@@ -106,8 +128,8 @@ public class HashTest extends TestCase {
         assertEquals(10, hashTable.getTableCap());
 
         // if we were to add one more it would have to double in size
-        hashTable.checkAndResize();
         hashTable.insert("Kant");
+        hashTable.checkAndResize();
         assertEquals(20, hashTable.getTableCap());
         assertEquals(5, hashTable.getTableSize());
         // check if everything got rehashed correclty
@@ -132,13 +154,15 @@ public class HashTest extends TestCase {
         hashTable.insert("JENNA");
 
         // add some tombstones
-        hashTable.remove("JENNA");
+        hashTable.remove("JENNA"); 
 
-        // add records that will have to prob when rehashed
+        // add records that will have to probe when rehashed
         hashTable.insert("Jettt wasd"); // should go to 1 on both
+        hashTable.remove("Jettt wasd");
         hashTable.insert("JENNA KANTOWSKI");
         hashTable.checkAndResize();
-
+        
+        
         assertTrue(hashTable.getRecords()[0].getKey().equals("Jett Morrow"));
         assertTrue(hashTable.getRecords()[1].getKey().equals("Adam"));
         assertTrue(hashTable.getRecords()[10].getKey().equals("Adamasa"));

@@ -130,7 +130,7 @@ public class Hash {
                 if (r == null) {
                     continue;
                 }
-                
+
                 if (r == tombstone) {
                     continue;
                 }

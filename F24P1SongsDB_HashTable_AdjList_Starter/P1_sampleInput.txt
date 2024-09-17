@@ -1,8 +1,6 @@
 remove song When Summer's Through
 print song
 print artist
-
-
 print graph
 insert Blind Lemon Jefferson<SEP>Long Lonesome Blues
 insert Blind Lemon Jefferson<SEP>Long Lonesome Blues

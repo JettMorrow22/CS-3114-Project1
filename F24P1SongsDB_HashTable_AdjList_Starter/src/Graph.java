@@ -27,23 +27,84 @@ public class Graph {
     public int getnumberOfNodes() {
         return numberOfNodes;
     }
-    
+
+
+    public DoubleLL[] getVertex() {
+        return vertex;
+    }
+
+
     /**
      * Method to use empty slots in vertex
+     * 
      * @return -1 if no freeSpots and index of free spot if available
      */
     public int checkFreeSpots() {
-        if (freeSpots[0] == 0) return -1;
-        
+        if (freeSpots[0] == 0)
+            return -1;
+
         int index = 0;
         while (freeSpots[index] != 0) {
             index++;
         }
         int temp = freeSpots[index];
-        //get rid of free spot
+        // get rid of free spot
         freeSpots[index] = 0;
         return temp;
     }
+
+
+    // newNode
+    public boolean addNode(int index) {
+        // create new DoubleLL for node
+        // create initial node that is adjacent to nothing
+        vertex[numberOfNodes] = new DoubleLL();
+        numberOfNodes++;
+        return true;
+    }
+
+
+    /**
+     * Adds edges for two vertices
+     * 
+     * @param v1
+     *            first vertex in graph
+     * @param v2
+     *            second vertex in graph
+     * @return false if both vertices already have edge for the other true if
+     *         not
+     * 
+     */
+    public boolean addEdge(int v1, int v2) {
+        // check if edge is already there
+
+        // they both have the adjacency so its a duplicate
+        if (vertex[v1].contains(v2) && vertex[v2].contains(v1)) {
+            return false;
+        }
+
+        // add one or both edges to vertices
+        if (!vertex[v1].contains(v2)) {
+            vertex[v1].addToEnd(v2);
+        }
+
+        if (!vertex[v2].contains(v1)) {
+            vertex[v2].addToEnd(v1);
+        }
+        return true;
+
+    }
+
+    // addEdge
+
+    // hasEdge
+    // removeEdge
+    // removeNode -> remove all edges from the node
+    // expand
+    // print
+    // union
+    // connectedCompopent
+    // diameter
 
     // OMG GUY SAID TO CREATE NEW NODE AND RECORD IN THE CONTROLLER CLASS
 
@@ -67,51 +128,5 @@ public class Graph {
     // we add edge when there is a new artist-song pair
 
     // Keep track of removed spots so we do not waste memory
-
-
-    // newNode
-    public boolean addNode(int index) {
-        // if key already in graph do not add it
-        if (hasNode(index))
-            return false;
-
-        // create new DoubleLL for node
-        // create initial node that is adjacent to nothing
-        vertex[numberOfNodes] = new DoubleLL();
-        numberOfNodes++;
-        return true;
-    }
-
-
-    /**
-     * method to determine if the graph contains a DLLNode with a recod with the
-     * key
-     * 
-     * @param s
-     *            the key
-     * @return true if the graph contains the key, false if not
-     */
-    public boolean hasNode(int index) {
-        // determine if the key is already in the graph
-        for (int x = 0; x < numberOfNodes; x++) {
-            // if we already have this key in the graph
-            if (vertex[x].getHead().getData() == index) {
-                return true;
-            }
-        }
-        return false;
-    }
-    // addEdge
-
-    // hasEdge
-    // removeEdge
-    // removeNode -> remove all edges from the node
-    // expand
-    // print
-    // union
-    // connectedCompopent
-    // diameter
-
-    // this is deadass all in 14.02
 
 }

@@ -9,7 +9,7 @@ public class Record {
 
     // key will be the artist/song
     private String key;
-    //node is the node in the graph
+    // node is the node in the graph
     private Node node;
     
     

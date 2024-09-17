@@ -24,12 +24,12 @@ public class DoubleLL {
     /**
      * adding a record to the end of a list
      * 
-     * @param r
-     *            record to be added
+     * @param n
+     *            vertex to be added
      * @return true for record being added
      */
-    public boolean addToEnd(Record r) {
-        DLLNode temp = new DLLNode(r.getNode().getIndex(), null, null);
+    public boolean addToEnd(int n) {
+        DLLNode temp = new DLLNode(n, null, null);
 
         if (head == null) {
             head = temp;
@@ -42,6 +42,26 @@ public class DoubleLL {
         }
         size++;
         return true;
+    }
+
+
+    /**
+     * DoubleLL method to determine if list contains param int
+     * 
+     * @param n
+     *            int to see if list contains
+     * @return true if it DoubleLL contains n
+     */
+    public boolean contains(int n) {
+        DLLNode temp = head;
+        while (temp != null) {
+            if (temp.data == n) {
+                return true;
+            }
+            temp = temp.next;
+        }
+
+        return false;
     }
 
 
@@ -68,6 +88,12 @@ public class DoubleLL {
         else { // remove the node
                // temp could be head and tail if list is length 1
 
+            // node is in middle of list
+            if (temp != head && temp != tail) {
+                temp.prev.setNext(temp.next);
+                temp.next.setPrev(temp.prev);
+            }
+
             // either node is head
             if (temp == head) {
                 head = head.next;
@@ -78,11 +104,7 @@ public class DoubleLL {
                 tail = tail.prev;
                 tail.setNext(null);
             }
-            // node is in middle of list
-            if (temp != head && temp != tail) {
-                temp.prev.setNext(temp.next);
-                temp.next.setPrev(temp.prev);
-            }
+
             size--;
             return true;
         }
@@ -116,28 +138,6 @@ public class DoubleLL {
      */
     public int getSize() {
         return size;
-    }
-
-
-    /**
-     * basic setter for head field
-     * 
-     * @param h
-     *            new DLLNode
-     */
-    public void setHead(DLLNode h) {
-        head = h;
-    }
-
-
-    /**
-     * basic setter for tail field
-     * 
-     * @param t
-     *            new DLLNode
-     */
-    public void setTail(DLLNode t) {
-        tail = t;
     }
 
     /**
@@ -195,7 +195,7 @@ public class DoubleLL {
          * @param d
          *            the int for data
          */
-        public void setRecord(int d) {
+        public void setData(int d) {
             data = d;
         }
 

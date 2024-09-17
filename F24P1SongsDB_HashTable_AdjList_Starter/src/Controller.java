@@ -51,6 +51,7 @@ public class Controller {
 
     private Hash artists;
     private Hash songs;
+    private Graph graph;
 
     /**
      * General constructor for Controller
@@ -62,6 +63,7 @@ public class Controller {
     public Controller(int hashSize) {
         artists = new Hash(hashSize);
         songs = new Hash(hashSize);
+        graph = new Graph();
     }
 
 
@@ -80,17 +82,32 @@ public class Controller {
      */
     public void insert(PrintWriter output, String artist, String song) {
         // insert artist in artists & song in songs
-
+        
+        
+        //try and add artist and song to hash
+        //if we add it then I need to add it to graph
+        
+        
+        //HASH TABLE
         // if an insert happens show it, if it doubled hash show it
         // this for artists
         if (artists.checkAndResize()) {
             output.println("Artist hash table size doubled.");
             output.flush();
         }
-        if (artists.insert(artist)) {
+        
+        //create record for Artist
+        Record artistRecord = new Record(artist, null);        
+        if (artists.insert(artistRecord)) {
             output.println("|" + artist + "|"
                 + " is added to the Artist database.");
             output.flush();
+            
+            //if successfully added to table then we need to add node to graph
+            int temp = graph.checkFreeSpots();
+            Node node = new Node(temp == -1 ? graph.getnumberOfNodes() : temp);
+            artists.find(artist).setNode(node);
+            graph.addNode(node.getIndex());
         }
 
         // this for the songs
@@ -98,11 +115,17 @@ public class Controller {
             output.println("Song hash table size doubled.");
             output.flush();
         }
-        if (songs.insert(song)) {
+        
+        Record songRecord = new Record(song, null);
+        if (songs.insert(songRecord)) {
             output.println("|" + song + "|"
                 + " is added to the Song database.");
             output.flush();
         }
+        
+        //we added nodes to graph based on hashTable, now add edges between nodes
+        //if both nodes already in graph check if duplicate
+        //other wise need to add edge
 
     }
 
@@ -117,6 +140,7 @@ public class Controller {
      *            artist to to be removed
      */
     public void removeArtist(PrintWriter output, String artist) {
+        //HASH
         if (artists.remove(artist)) {
             output.println("|" + artist
                 + "| is removed from the Artist database.");

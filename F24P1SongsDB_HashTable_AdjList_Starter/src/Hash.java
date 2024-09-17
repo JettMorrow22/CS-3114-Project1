@@ -23,7 +23,7 @@ public class Hash {
         records = new Record[hashSize];
         tableCap = hashSize;
         tableSize = 0;
-        tombstone = new Record("TOMBSTONE");
+        tombstone = new Record("TOMBSTONE", null);
     }
 
     // needs methods
@@ -47,9 +47,9 @@ public class Hash {
      *            the key to be added
      * @return true if key was added, false if not
      */
-    public boolean insert(String key) {
+    public boolean insert(Record artist) {
 
-        int home = h(key, tableCap);
+        int home = h(artist.getKey(), tableCap);
         int index = home;
         int i = 1;
 
@@ -60,7 +60,7 @@ public class Hash {
             // if we find tombstone remember it and check for dup
             if (records[index] == tombstone) {
                 // if no dup then break and add it
-                if (find(key) == null) {
+                if (find(artist.getKey()) == null) {
                     break;
                 }
                 else {
@@ -68,7 +68,7 @@ public class Hash {
                     return false;
                 }
             }
-            else if (records[index].getKey().equals(key)) {
+            else if (records[index].getKey().equals(artist.getKey())) {
                 // we at a duplicate
                 return false;
             }
@@ -79,7 +79,7 @@ public class Hash {
         }
 
         // add the key to table and increment size
-        records[index] = new Record(key);
+        records[index] = artist;
         tableSize++;
         return true;
     }
@@ -144,7 +144,7 @@ public class Hash {
                     i++;
                 }
 
-                newRecords[index] = new Record(r.getKey());
+                newRecords[index] = new Record(r.getKey(), r.getNode());
             }
 
             // update records and tableCap

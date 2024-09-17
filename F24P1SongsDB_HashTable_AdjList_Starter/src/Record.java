@@ -9,6 +9,10 @@ public class Record {
 
     // key will be the artist/song
     private String key;
+    //node is the node in the graph
+    private Node node;
+    
+    
 
     /**
      * basic constructor for the record
@@ -16,10 +20,30 @@ public class Record {
      * @param k
      *            the key
      */
-    public Record(String k) {
+    public Record(String k, Node n) {
         key = k;
+        node = n;
     }
 
+    /**
+     * basic getter for Node
+     * 
+     * @return node
+     */
+    public Node getNode() {
+        return node;
+    }
+
+
+    /**
+     * Basic setter for Node
+     * 
+     * @param node
+     *            new node
+     */
+    public void setNode(Node node) {
+        this.node = node;
+    }
 
     /**
      * basic getter for key field

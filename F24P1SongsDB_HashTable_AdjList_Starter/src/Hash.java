@@ -164,23 +164,24 @@ public class Hash {
      * 
      * @param key
      *            the key to be searching for
-     * @return true if key is removed false if not
+     * @return record if found, null if not
      */
-    public boolean remove(String key) {
+    public Record remove(String key) {
         // search for key in table, if it exists remove it
         int home = h(key, tableCap);
         int index = home;
         int i = 1;
         while (records[index] != null) {
             if (records[index].getKey().equals(key)) {
+                Record temp = records[index];
                 records[index] = tombstone;
                 tableSize--;
-                return true;
+                return temp;
             }
             index = (home + i * i) % tableCap;
             i++;
         }
-        return false;
+        return null;
     }
 
 

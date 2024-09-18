@@ -81,51 +81,53 @@ public class Controller {
      *            the song to be addded
      */
     public void insert(PrintWriter output, String artist, String song) {
-        // insert artist in artists & song in songs
-
-        // try and add artist and song to hash
-        // if we add it then I need to add it to graph
 
         // HASH TABLE
-        // if an insert happens show it, if it doubled hash show it
-        // this for artists
-        if (artists.checkAndResize()) {
-            output.println("Artist hash table size doubled.");
-            output.flush();
-        }
+        // if added a node is also added to graph
+        helpInsertHash(output, artist, artists, "Artist");
+        helpInsertHash(output, song, songs, "Song");
 
-        // create record for Artist
-        Record artistRecord = new Record(artist, null);
-        if (artists.insert(artistRecord)) {
-            output.println("|" + artist + "|"
-                + " is added to the Artist database.");
-            output.flush();
-            
-            //update node index in table record and initialize DoubleLL
-            artists.find(artist).setNode(new Node(graph.addNode()));
-        }
-
-        // this for the songs
-        if (songs.checkAndResize()) {
-            output.println("Song hash table size doubled.");
-            output.flush();
-        }
-
-        Record songRecord = new Record(song, null);
-        if (songs.insert(songRecord)) {
-            output.println("|" + song + "|"
-                + " is added to the Song database.");
-            output.flush();
-
-            //update node index in table record and initlize DoubleLL
-            songs.find(song).setNode(new Node(graph.addNode()));
-        }
-
-        if (!graph.addEdge(artists.find(artist).getNode().getIndex(), songs
-            .find(song).getNode().getIndex())) {
+        // add the edges between the two nodes just added
+        int artistNode = artists.find(artist).getNode().getIndex();
+        int songNode = songs.find(song).getNode().getIndex();
+        if (!graph.addEdge(artistNode, songNode)) {
             output.println("|" + artist + "<SEP>" + song
                 + "| duplicates a record already in the database.");
             output.flush();
+        }
+    }
+
+
+    /**
+     * method for inserting a key into a specified Hash
+     * 
+     * @param output
+     *            to print
+     * @param key
+     *            the key to be added
+     * @param table
+     *            song or artist hash table
+     * @param type
+     *            to specify song or artist hash table
+     */
+    public void helpInsertHash(
+        PrintWriter output,
+        String key,
+        Hash table,
+        String type) {
+        if (table.checkAndResize()) {
+            output.println(type + " hash table size doubled.");
+            output.flush();
+        }
+
+        Record record = new Record(key, null);
+        if (table.insert(record)) {
+            output.println("|" + key + "| is added to the " + type
+                + " database.");
+            output.flush();
+
+            // Update the node index and add a new node in the graph
+            table.find(key).setNode(new Node(graph.addNode()));
         }
     }
 
@@ -141,9 +143,13 @@ public class Controller {
      */
     public void removeArtist(PrintWriter output, String artist) {
         // HASH
-        if (artists.remove(artist)) {
+        Record record = artists.remove(artist);
+        if (record != null) {
             output.println("|" + artist
                 + "| is removed from the Artist database.");
+
+            // remove it from the graph
+            graph.removeNode(record.getNode().getIndex());
         }
         else {
             output.println("|" + artist
@@ -163,8 +169,12 @@ public class Controller {
      *            the song to be removed
      */
     public void removeSong(PrintWriter output, String song) {
-        if (songs.remove(song)) {
+        Record record = songs.remove(song);
+        if (record != null) {
             output.println("|" + song + "| is removed from the Song database.");
+
+            // remove from graph
+            graph.removeNode(record.getNode().getIndex());
         }
         else {
             output.println("|" + song

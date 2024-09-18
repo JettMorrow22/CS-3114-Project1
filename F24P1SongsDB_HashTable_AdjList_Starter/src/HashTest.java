@@ -201,19 +201,19 @@ public class HashTest extends TestCase {
                                                        // prob to 1, then to
         // 4
         // remove home index, now tombstone at 1
-        assertTrue(hashTable.remove("Adam"));
+        assertNotNull(hashTable.remove("Adam"));
         assertTrue(hashTable.getRecords()[1].getKey().equals("TOMBSTONE"));
         assertEquals(2, hashTable.getTableSize());
 
         // remove something that is a tombstone now
-        assertFalse(hashTable.remove("Adam"));
+        assertNull(hashTable.remove("Adam"));
 
         // remove key that DNE
-        assertFalse(hashTable.remove("DNE"));
+        assertNull(hashTable.remove("DNE"));
         assertEquals(2, hashTable.getTableSize());
 
         // remove Adamasa, tries 0 not it, prob 1 tombstone, checks 4 removes it
-        assertTrue(hashTable.remove("Adamasa"));
+        assertNotNull(hashTable.remove("Adamasa"));
         assertEquals(1, hashTable.getTableSize());
 
     }

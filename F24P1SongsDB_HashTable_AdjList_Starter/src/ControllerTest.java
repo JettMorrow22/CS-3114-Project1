@@ -29,7 +29,7 @@ public class ControllerTest extends TestCase {
     /**
      * test case for insert method
      */
-    public void testInsert() {
+    public void testInsertHash() {
         controller.insert(printer, "Artist1", "Song1");
         String output = writer.toString();
 

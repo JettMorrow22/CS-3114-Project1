@@ -3,6 +3,7 @@ total songs: 0
 total artists: 0
 |Blind Lemon Jefferson| is added to the Artist database.
 |Long Lonesome Blues| is added to the Song database.
+|Blind Lemon Jefferson<SEP>Long Lonesome Blues| duplicates a record already in the database.
 |Long   Lonesome Blues| is added to the Song database.
 |long Lonesome Blues| is added to the Song database.
 |Ma Rainey| is added to the Artist database.

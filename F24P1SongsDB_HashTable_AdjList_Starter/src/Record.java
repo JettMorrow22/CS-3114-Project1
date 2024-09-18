@@ -11,19 +11,20 @@ public class Record {
     private String key;
     // node is the node in the graph
     private Node node;
-    
-    
 
     /**
-     * basic constructor for the record
+     * basic constructor for record
      * 
      * @param k
-     *            the key
+     *            key
+     * @param n
+     *            node
      */
     public Record(String k, Node n) {
         key = k;
         node = n;
     }
+
 
     /**
      * basic getter for Node
@@ -44,6 +45,7 @@ public class Record {
     public void setNode(Node node) {
         this.node = node;
     }
+
 
     /**
      * basic getter for key field

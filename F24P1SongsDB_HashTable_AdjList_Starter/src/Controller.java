@@ -100,12 +100,9 @@ public class Controller {
             output.println("|" + artist + "|"
                 + " is added to the Artist database.");
             output.flush();
-
-            // if successfully added to table then we need to add node to graph
-            int temp = graph.checkFreeSpots();
-            Node node = new Node(temp == -1 ? graph.getnumberOfNodes() : temp);
-            artists.find(artist).setNode(node);
-            graph.addNode(node.getIndex());
+            
+            //update node index in table record and initialize DoubleLL
+            artists.find(artist).setNode(new Node(graph.addNode()));
         }
 
         // this for the songs
@@ -120,12 +117,8 @@ public class Controller {
                 + " is added to the Song database.");
             output.flush();
 
-            // if successfully added to table then we need to add node to graph
-            int temp = graph.checkFreeSpots();
-            Node node = new Node(temp == -1 ? graph.getnumberOfNodes() : temp);
-            songs.find(song).setNode(node);
-            graph.addNode(node.getIndex());
-
+            //update node index in table record and initlize DoubleLL
+            songs.find(song).setNode(new Node(graph.addNode()));
         }
 
         if (!graph.addEdge(artists.find(artist).getNode().getIndex(), songs

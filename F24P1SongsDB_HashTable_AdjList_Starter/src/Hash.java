@@ -43,8 +43,8 @@ public class Hash {
     /**
      * Attempts to insert key into the hash table
      * 
-     * @param key
-     *            the key to be added
+     * @param artist
+     *            record to be added
      * @return true if key was added, false if not
      */
     public boolean insert(Record artist) {

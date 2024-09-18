@@ -10,6 +10,9 @@ public class DoubleLL {
     private DLLNode tail;
     private int size;
 
+    /**
+     * constructor for DoubleLL
+     */
     public DoubleLL() {
         head = null;
         tail = null;
@@ -85,29 +88,29 @@ public class DoubleLL {
         if (temp == null) {
             return false;
         }
-        else { // remove the node
-               // temp could be head and tail if list is length 1
+        else {
 
-            // node is in middle of list
-            if (temp != head && temp != tail) {
-                temp.prev.setNext(temp.next);
-                temp.next.setPrev(temp.prev);
+            if (temp == head && temp == tail) {
+                head = null;
+                tail = null;
             }
-
-            // either node is head
-            if (temp == head) {
+            else if (temp == head) {
                 head = head.next;
                 head.setPrev(null);
+
             }
-            // node is tail
-            if (temp == tail) {
+            else if (temp == tail) {
                 tail = tail.prev;
                 tail.setNext(null);
             }
-
-            size--;
-            return true;
+            else {
+                temp.prev.setNext(temp.next);
+                temp.next.setPrev(temp.prev);
+            }
         }
+
+        size--;
+        return true;
     }
 
 
@@ -152,6 +155,16 @@ public class DoubleLL {
         private DLLNode prev;
         private DLLNode next;
 
+        /**
+         * basic constructor for DLLNode
+         * 
+         * @param d
+         *            data
+         * @param p
+         *            prev
+         * @param n
+         *            next
+         */
         public DLLNode(int d, DLLNode p, DLLNode n) {
             data = d;
             prev = p;

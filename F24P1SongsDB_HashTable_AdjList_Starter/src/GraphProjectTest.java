@@ -111,7 +111,6 @@ public class GraphProjectTest extends TestCase {
             "solutionTestData/P1_sampleOutput.txt");
 
         // Compare the two outputs
-        // TODO: uncomment the following line
         // once you have implemented your project
         assertFuzzyEquals(expectedOutput, actualOutput);
 

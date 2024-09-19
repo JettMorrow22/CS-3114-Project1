@@ -3,7 +3,7 @@ print song
 print artist
 print graph
 insert Blind Lemon Jefferson<SEP>Long Lonesome Blues
-insert Blind Lemon Jefferson<SEP>Long Lonesome Blues
+insert    Blind Lemon Jefferson<SEP>   Long Lonesome Blues
 insert Blind Lemon Jefferson<SEP>Long   Lonesome Blues
 insert Blind Lemon Jefferson<SEP>long Lonesome Blues
 insert Ma Rainey<SEP>Ma Rainey's Black Bottom

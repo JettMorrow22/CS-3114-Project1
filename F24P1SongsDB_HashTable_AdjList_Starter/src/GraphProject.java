@@ -43,7 +43,7 @@ public class GraphProject {
      * 
      */
     public static void main(String[] args) {
-        // input should be {HashTableSize} {Command File}
+        // input should be {HashTableSize} {Command File} 
         if (args.length != 2) {
             throw new IllegalArgumentException(
                 "Expected exactly 2 argument: {HashTableSize} {Command File}");
@@ -75,6 +75,8 @@ public class GraphProject {
 
             // process all the commands in the input file
             interpreter.interpretAllLines(fileInput, stdout);
+            fileInput.close();
+            stdout.close();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

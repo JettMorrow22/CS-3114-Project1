@@ -46,9 +46,16 @@ public class Controller {
     public void insert(PrintWriter output, String artist, String song) {
 
         // HASH TABLE
-        // if added a node is also added to graph
-        helpInsertHash(output, artist, artists, "Artist");
-        helpInsertHash(output, song, songs, "Song");
+        // check if the artist/song should even be added
+        if (artists.find(artist) == null) {
+            helpInsertHash(output, artist, artists, "Artist");
+
+        }
+        
+        if (songs.find(song) == null) {
+            helpInsertHash(output, song, songs, "Song");
+        }
+        
 
         // add the edges between the two nodes just added
         int artistNode = artists.find(artist).getNode().getIndex();
@@ -78,6 +85,7 @@ public class Controller {
         String key,
         Hash table,
         String type) {
+        //this is assuming we are going to add
         if (table.checkAndResize()) {
             output.println(type + " hash table size doubled.");
             output.flush();

@@ -1,5 +1,4 @@
 
-
 /**
  * Graph class
  *
@@ -12,9 +11,6 @@ public class Graph {
     private int numberOfNodes;
     private int[] freeSpots;
     private int freeSpotIndex;
-    private int[] parent;
-    private int[] weight;
-
 
     /**
      * basic constructor for graph
@@ -25,15 +21,6 @@ public class Graph {
         freeSpots = new int[50];
         for (int x = 0; x < 50; x++) {
             freeSpots[x] = -1;
-        }
-        freeSpotIndex = 0;
-        
-        //create the array for the parents and assign each a weight of 0
-        parent = new int[50];
-        weight = new int[50];
-        for (int i = 0; i < 50; i++) {
-            parent[i] = -1; // each node is set to no parent
-            weight[i] = 1;   // initial weight is 1
         }
     }
 
@@ -51,7 +38,7 @@ public class Graph {
     /**
      * basic getter for vertex for tetst
      * 
-     * @return
+     * @return vertex
      */
     public DoubleLL[] getVertex() {
         return vertex;
@@ -179,14 +166,14 @@ public class Graph {
      * @return true if removed false if nothing to be removed
      */
     public boolean removeNode(int n) {
-        if (vertex[n] == null)
+        if (n >= vertex.length || n < 0 || vertex[n] == null)
             return false;
 
-        // remove from all the other nodes DoubleLL
-        for (int x = 0; x < vertex.length; x++) {
-            if (x != n && vertex[x] != null) {
-                removeEdge(x, n);
-            }
+        // go through adjacency list and remove the node
+        while (vertex[n].getSize() > 0) {
+            // go to head and remove it
+            int temp = vertex[n].getHead().getData();
+            removeEdge(n, temp);
         }
 
         // now remove the node
@@ -219,98 +206,59 @@ public class Graph {
 
     }
 
-    /**
-     * union method, aims to combine two disjoint graphs if they have
-     * different parent methods
-     * @param a one of the nodes we are using
-     * @param b the other node we are using
-     */
-    public void union(int a, int b)
-    {
-        //we need to use the find method to determine if the nodes
-        //are in the same graph or not
-        //if they are, do nothing - if they aren't, combine them
-        int root1 = find(a);
-        int root2 = find(b);
-        if (root1 != root2)
-            {
-            if (weight[root2] > weight[root1]) {
-                parent[root1] = root2;
-                weight[root2] += weight[root1];
-              } else {
-                parent[root2] = root1;
-                weight[root1] += weight[root2];
-              }
-            }
-    }
-    /**
-     * find method for a node, we want to return the root of the node
-     * @param node the node we are finding the root of
-     * @return the root of the node
-     */
-    public int find(int node)
-    {
-        if (parent[node] == -1)
-        {
-            return node;
-        }
-        parent[node] = find(parent[node]);
-        return parent[node];
-    }
-    /**
-     * print method
-     * @param title the name of whatever we want to print
-     */
-    public void print(String title)
-    {
-        //print either the list of artists, list of songs, or the graph
-    }
+
     /**
      * helper method for printGraph
      * this is a recursive depth first search method
-     * @param node the current node
-     * @param visited a boolean array of whether or not a node has been visited
+     * 
+     * @param node
+     *            the current node
+     * @param visited
+     *            a boolean array of whether or not a node has been visited
      * @return the size of the connected component
      */
-    private int dfs(int node, boolean[] visited)
-    {
-        visited[node] = true; //mark the current node as visited
-        int size = 1; //initialize the size of the component to 1
-        
+    private int dfs(int node, boolean[] visited) {
+        visited[node] = true; // mark the current node as visited
+        int size = 1; // initialize the size of the component to 1
+
         DoubleLL.DLLNode current = vertex[node].getHead();
-        
-        while (current != null)
-        {
+
+        while (current != null) {
             int neighbor = current.getData();
-            if(!visited[neighbor])
-            {
+            if (!visited[neighbor]) {
                 size += dfs(neighbor, visited);
             }
             current = current.getNext();
         }
         return size;
     }
+
+
     /**
      * connectedComponents method that prints the graph
+     * 
      * @return an array of two ints, first being the number of connected
-     * components and the second being the size of the largest component
+     *         components and the second being the size of the largest component
      */
-    public int[] connectedComponents()
-    {
-        boolean[] visited = new boolean[numberOfNodes];//to track visited nodes
+    public int[] connectedComponents() {
+        boolean[] visited = new boolean[vertex.length]; // to track visited
+                                                        // nodes
         int numComp = 0; // # of connected components
         int largestComp = 0; // size of the largest component
-        
-        for (int i = 0; i < numberOfNodes; i++) {
-            if (vertex[i] != null && !visited[i]) //if node is part of graph
-            { //and not visited
-                
-                numComp++; //new component found
-                int compSize = dfs(i, visited); //use DFS and get size
-                
-                if (compSize > largestComp)
-                {
-                    largestComp = compSize;//update largest size
+
+        for (int i = 0; i < visited.length; i++) {
+            if (vertex[i] == null) {
+                visited[i] = true;
+            }
+            
+            if (!visited[i]) // if node is part of graph
+            { // and not visited
+
+                numComp++; // new component found
+                int compSize = dfs(i, visited); // use DFS and get size
+
+                if (compSize > largestComp) {
+                    largestComp = compSize; // update largest size
                 }
             }
         }
@@ -319,8 +267,5 @@ public class Graph {
         components[1] = largestComp;
         return components;
     }
-    
-    // connectedComponent
-    // diameter
 
 }

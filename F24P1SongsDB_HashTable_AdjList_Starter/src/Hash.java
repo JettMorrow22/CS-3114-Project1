@@ -120,7 +120,7 @@ public class Hash {
      */
     public boolean checkAndResize() {
         // check if we need to double records size then add it
-        if (tableSize >= tableCap / 2) {
+        if (tableSize + 1 >= tableCap / 2) {
             // create new records array
             Record[] newRecords = new Record[tableCap * 2];
 
@@ -168,7 +168,7 @@ public class Hash {
      */
     public Record remove(String key) {
         // search for key in table, if it exists remove it
-        int home = h(key, tableCap);
+        int home = h(key, tableCap); 
         int index = home;
         int i = 1;
         while (records[index] != null) {

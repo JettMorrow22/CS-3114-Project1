@@ -101,7 +101,7 @@ public class CommandProcessor implements Interpreter {
                         break;
                     case "song":
                         controller.removeSong(output, name);
-                        break;
+                        break; 
                 }
                 break;
 
@@ -114,9 +114,9 @@ public class CommandProcessor implements Interpreter {
                     case "song":
                         controller.printSong(output);
                         break;
-// case "graph":
-// // controller.printGraph(PrintWriter output);
-// break;
+                    case "graph":
+                        controller.printGraph(output);
+                        break;
                 }
                 break;
         }

@@ -79,6 +79,33 @@ public class GraphTest extends TestCase {
         assertEquals(graph.getVertex()[3].getSize(), 0);
 
     }
+    
+    public void testConnected() {
+        graph.addNode();
+        graph.addNode();
+        graph.addNode();
+        graph.addNode(); 
+        graph.addNode();
+        graph.addNode();
+        graph.addNode();
+        graph.addNode(); 
+        
+        graph.addEdge(0, 2);
+        graph.addEdge(0, 3);
+        graph.addEdge(0, 4);
+        graph.addEdge(1, 4);
+        graph.addEdge(1, 5);
+        graph.addEdge(1, 6);
+        graph.addEdge(1, 7);
+        
+        assertEquals(graph.connectedComponents()[0], 1);
+        assertEquals(graph.connectedComponents()[1], 8);
+        
+        assertTrue(graph.removeNode(1));
+        assertEquals(graph.connectedComponents()[0], 4);
+        assertEquals(graph.connectedComponents()[1], 4);
+        
+    }
 
 
     /**
@@ -91,11 +118,13 @@ public class GraphTest extends TestCase {
         graph.addNode(); // I have nodes 0 - 3
 
         graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
+        graph.addEdge(0, 2); 
         graph.addEdge(0, 3);
 
         // remove invalid node
-        assertFalse(graph.removeNode(10));
+        assertFalse(graph.removeNode(8));
+        assertFalse(graph.removeNode(50));
+        assertFalse(graph.removeNode(-5));
 
         // remove valid node
         assertTrue(graph.removeNode(2));

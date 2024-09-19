@@ -1,6 +1,8 @@
 |When Summer's Through| does not exist in the Song database.
 total songs: 0
 total artists: 0
+There are 0 connected components
+The largest connected component has 0 elements
 |Blind Lemon Jefferson| is added to the Artist database.
 |Long Lonesome Blues| is added to the Song database.
 |Blind Lemon Jefferson<SEP>Long Lonesome Blues| duplicates a record already in the database.
@@ -21,6 +23,8 @@ total artists: 2
 16: |Ma Rainey's Black Bottom|
 19: |Long   Lonesome Blues|
 total songs: 6
+There are 1 connected components
+The largest connected component has 8 elements
 |Sleepy| does not exist in the Song database.
 |ma rainey| does not exist in the Artist database.
 |Ma Rainey| is removed from the Artist database.

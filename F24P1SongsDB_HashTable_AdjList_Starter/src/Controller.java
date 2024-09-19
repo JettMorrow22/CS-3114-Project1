@@ -157,9 +157,6 @@ public class Controller {
         String[] res = artists.print();
 
         for (String s : res) {
-            // skip empty strings
-            if (s == null)
-                continue;
             output.println(s);
         }
 
@@ -178,8 +175,6 @@ public class Controller {
         String[] res = songs.print();
 
         for (String s : res) {
-            if (s == null)
-                continue;
             output.println(s);
         }
 

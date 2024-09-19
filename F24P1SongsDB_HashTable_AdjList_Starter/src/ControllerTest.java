@@ -54,20 +54,15 @@ public class ControllerTest extends TestCase {
     }
 
 
-    /**
-     * test case for removeArtist method
-     */
-    public void testRemoveArtist() {
-
-    }
-
 
     /**
      * test case for removeSong method
      */
-    public void testRemoveSong() {
+    public void testRemoveSongArtist() {
         controller.insert(printer, "treaty", "stop and stare");
         controller.removeSong(printer, "stop and stare");
+        controller.removeSong(printer, "jett");
+        controller.removeArtist(printer, "jett");
 
     }
 

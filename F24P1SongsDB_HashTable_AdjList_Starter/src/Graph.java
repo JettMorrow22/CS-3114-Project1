@@ -292,9 +292,11 @@ public class Graph {
         return size;
     }
     /**
-     * printGraph method that prints the graph
+     * connectedComponents method that prints the graph
+     * @return an array of two ints, first being the number of connected
+     * components and the second being the size of the largest component
      */
-    public void printGraph()
+    public int[] connectedComponents()
     {
         boolean[] visited = new boolean[numberOfNodes];//to track visited nodes
         int numComp = 0; // # of connected components
@@ -313,12 +315,12 @@ public class Graph {
                 }
             }
         }
-
-        // Print the results
-        System.out.println("There are " + numComp + " connected components");
-        System.out.println("The largest component has " + largestComp +
-            " elements");
+        int[] components = new int[2];
+        components[0] = numComp;
+        components[1] = largestComp;
+        return components;
     }
+    
     // connectedComponent
     // diameter
 

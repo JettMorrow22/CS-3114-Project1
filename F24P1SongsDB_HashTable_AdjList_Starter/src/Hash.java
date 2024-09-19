@@ -120,7 +120,7 @@ public class Hash {
      */
     public boolean checkAndResize() {
         // check if we need to double records size then add it
-        if (tableSize + 1 >= tableCap / 2) {
+        if (tableSize >= tableCap / 2) {
             // create new records array
             Record[] newRecords = new Record[tableCap * 2];
 

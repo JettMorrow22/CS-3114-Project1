@@ -169,11 +169,11 @@ public class HashTest extends TestCase {
                                                                // prob 9
         // add 9
         //if we added another it would be >= 50% so resize?
-        assertTrue(hashTable.checkAndResize());
+        assertFalse(hashTable.checkAndResize());
         assertTrue(hashTable.getRecords()[0].getKey().equals("Jett Morrow"));
         assertTrue(hashTable.getRecords()[1].getKey().equals("Adam"));
-        assertTrue(hashTable.getRecords()[10].getKey().equals("Adamasa"));
-        assertTrue(hashTable.getRecords()[4].getKey().equals(
+        assertTrue(hashTable.getRecords()[4].getKey().equals("Adamasa"));
+        assertTrue(hashTable.getRecords()[9].getKey().equals(
             "JENNA KANTOWSKI"));
 
         // check resizing with tombstones

@@ -1,3 +1,5 @@
+
+
 /**
  * Graph class
  *
@@ -263,6 +265,61 @@ public class Graph {
     {
         //print either the list of artists, list of songs, or the graph
     }
+    /**
+     * helper method for printGraph
+     * this is a recursive depth first search method
+     * @param node the current node
+     * @param visited a boolean array of whether or not a node has been visited
+     * @return the size of the connected component
+     */
+    private int dfs(int node, boolean[] visited)
+    {
+        visited[node] = true; //mark the current node as visited
+        int size = 1; //initialize the size of the component to 1
+        
+        DoubleLL.DLLNode current = vertex[node].getHead();
+        
+        while (current != null)
+        {
+            int neighbor = current.getData();
+            if(!visited[neighbor])
+            {
+                size += dfs(neighbor, visited);
+            }
+            current = current.getNext();
+        }
+        return size;
+    }
+    /**
+     * connectedComponents method that prints the graph
+     * @return an array of two ints, first being the number of connected
+     * components and the second being the size of the largest component
+     */
+    public int[] connectedComponents()
+    {
+        boolean[] visited = new boolean[numberOfNodes];//to track visited nodes
+        int numComp = 0; // # of connected components
+        int largestComp = 0; // size of the largest component
+        
+        for (int i = 0; i < numberOfNodes; i++) {
+            if (vertex[i] != null && !visited[i]) //if node is part of graph
+            { //and not visited
+                
+                numComp++; //new component found
+                int compSize = dfs(i, visited); //use DFS and get size
+                
+                if (compSize > largestComp)
+                {
+                    largestComp = compSize;//update largest size
+                }
+            }
+        }
+        int[] components = new int[2];
+        components[0] = numComp;
+        components[1] = largestComp;
+        return components;
+    }
+    
     // connectedComponent
     // diameter
 

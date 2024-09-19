@@ -167,5 +167,17 @@ public class GraphTest extends TestCase {
         assertEquals(4, graph.getVertex()[0].getSize());
 
     }
+    /**
+     * test method for connectedComponents
+     */
+    public void testConnectedComponents()
+    {
+        assertEquals(0, graph.connectedComponents()[0]);
+        assertEquals(0, graph.connectedComponents()[1]);
+        graph.addNode();
+        graph.addNode();
+        assertEquals(2, graph.connectedComponents()[0]);
+        assertEquals(1, graph.connectedComponents()[1]);
+    }
 
 }

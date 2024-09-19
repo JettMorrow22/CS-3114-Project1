@@ -223,6 +223,19 @@ public class Controller {
         output.println("total songs: " + songs.getTableSize());
         output.flush();
     }
-
+    
+    /**
+     * Print method for the graph
+     * @param output the output file
+     */
+    public void printGraph(PrintWriter output)
+    {
+        int numComp = graph.connectedComponents()[0];
+        int largestComp = graph.connectedComponents()[1];
+        output.println("There are " + numComp + " connected components");
+        output.println("The largest component has " + largestComp +
+            " elements");
+        output.flush();
+    }
     // create methods for everything, insert, delete, print
 }

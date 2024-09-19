@@ -20,7 +20,7 @@ public class ControllerTest extends TestCase {
      * setUp method for the test class
      */
     public void setUp() {
-        controller = new Controller(2);
+        controller = new Controller(20);
         writer = new StringWriter();
         printer = new PrintWriter(writer);
     }
@@ -57,8 +57,12 @@ public class ControllerTest extends TestCase {
     /**
      * test case for removeArtist method
      */
-    public void testRemoveArtist() {
+    public void testRemoveArtist() 
+    {
 
+        controller.insert(printer, "treaty", "stop and stare");
+        controller.removeSong(printer, "treaty");
+        
     }
 
 
@@ -70,6 +74,7 @@ public class ControllerTest extends TestCase {
         controller.removeSong(printer, "stop and stare");
 
     }
+    
 
 
     /**

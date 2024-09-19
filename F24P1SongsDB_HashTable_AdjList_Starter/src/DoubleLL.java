@@ -19,10 +19,6 @@ public class DoubleLL {
         size = 0;
     }
 
-    // I think I only need to be able to add elems to the end of a DLL list
-    // remove elements from middle of list off search
-    // and print maybe??
-
 
     /**
      * adding a record to the end of a list

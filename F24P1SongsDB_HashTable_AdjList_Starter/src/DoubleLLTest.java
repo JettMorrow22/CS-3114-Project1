@@ -109,7 +109,8 @@ public class DoubleLLTest extends TestCase {
         assertTrue(list.getTail().getData() == 4);
         assertEquals(list.getSize(), 5);
     }
-    
+
+
     /**
      * test method to test removing when there is only one object
      */

@@ -114,6 +114,22 @@ public class HashTest extends TestCase {
 
 
     /**
+     * test method to double check probing in find
+     */
+    public void testExtraFind() {
+        hashTable.insert(new Record("Jett Morrow", null)); // should be index 0
+        hashTable.insert(new Record("Adam", null)); // should be index 1
+        hashTable.insert(new Record("Adamasa", null)); // should be index 0, so
+                                                       // prob to 1, then 4
+        hashTable.insert(new Record("fasdffdsateyu", null)); // 0, 1, 4, 9
+
+        assertTrue(hashTable.find("fasdffdsateyu").getKey().equals(
+            "fasdffdsateyu"));
+
+    }
+
+
+    /**
      * testcase for checkAndResize method without tombstones
      * 
      * @throws Exception
@@ -168,7 +184,7 @@ public class HashTest extends TestCase {
                                                                // 1, prob 4,
                                                                // prob 9
         // add 9
-        //if we added another it would be >= 50% so resize?
+        // if we added another it would be >= 50% so resize?
         assertFalse(hashTable.checkAndResize());
         assertTrue(hashTable.getRecords()[0].getKey().equals("Jett Morrow"));
         assertTrue(hashTable.getRecords()[1].getKey().equals("Adam"));

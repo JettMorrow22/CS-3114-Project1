@@ -79,7 +79,8 @@ public class GraphTest extends TestCase {
         assertEquals(graph.getVertex()[3].getSize(), 0);
 
     }
-    
+
+
     /**
      * method for testing connected components after removal
      */
@@ -87,12 +88,12 @@ public class GraphTest extends TestCase {
         graph.addNode();
         graph.addNode();
         graph.addNode();
-        graph.addNode(); 
         graph.addNode();
         graph.addNode();
         graph.addNode();
-        graph.addNode(); 
-        
+        graph.addNode();
+        graph.addNode();
+
         graph.addEdge(0, 2);
         graph.addEdge(0, 3);
         graph.addEdge(0, 4);
@@ -100,14 +101,14 @@ public class GraphTest extends TestCase {
         graph.addEdge(1, 5);
         graph.addEdge(1, 6);
         graph.addEdge(1, 7);
-        
+
         assertEquals(graph.connectedComponents()[0], 1);
         assertEquals(graph.connectedComponents()[1], 8);
-        
+
         assertTrue(graph.removeNode(1));
         assertEquals(graph.connectedComponents()[0], 4);
         assertEquals(graph.connectedComponents()[1], 4);
-        
+
     }
 
 
@@ -121,7 +122,7 @@ public class GraphTest extends TestCase {
         graph.addNode(); // I have nodes 0 - 3
 
         graph.addEdge(0, 1);
-        graph.addEdge(0, 2); 
+        graph.addEdge(0, 2);
         graph.addEdge(0, 3);
 
         // remove invalid node
@@ -199,11 +200,12 @@ public class GraphTest extends TestCase {
         assertEquals(4, graph.getVertex()[0].getSize());
 
     }
+
+
     /**
      * test method for connectedComponents
      */
-    public void testConnectedComponents()
-    {
+    public void testConnectedComponents() {
         assertEquals(0, graph.connectedComponents()[0]);
         assertEquals(0, graph.connectedComponents()[1]);
         graph.addNode();

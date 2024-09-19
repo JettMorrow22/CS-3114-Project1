@@ -14,7 +14,7 @@ public class Hash {
 
     /**
      * Constructor for hash
-     * inializes teh Record[] with param size and tableCap and tableSize
+     * initializes the Record[] with param size and tableCap and tableSize
      * 
      * @param hashSize
      *            the length of the Record[]
@@ -25,19 +25,6 @@ public class Hash {
         tableSize = 0;
         tombstone = new Record("TOMBSTONE", null);
     }
-
-    // needs methods
-    // insert
-    // if an insert will be size >= 50% of cap then double size of records and
-    // rehash
-    // first check home position, if not quadratic probe to find open positions
-    // when encountering a tombstone, mark that index, probe to check for
-    // duplicates
-    // if we find duplicate do not add it, it we find empty position then add at
-    // the first tombstone
-
-    // my idea of a tombstone is, remove a record in records, by placing the
-    // tombstone record in its place
 
 
     /**
@@ -168,7 +155,7 @@ public class Hash {
      */
     public Record remove(String key) {
         // search for key in table, if it exists remove it
-        int home = h(key, tableCap); 
+        int home = h(key, tableCap);
         int index = home;
         int i = 1;
         while (records[index] != null) {

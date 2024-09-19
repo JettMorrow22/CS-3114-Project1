@@ -13,19 +13,8 @@ import java.util.Scanner;
  */
 public class CommandProcessor implements Interpreter {
 
-    // implement interpreter
-    // read in commands
-    // has controller object and calls methods on it
-
     // commands are insert, remove, print
     private Controller controller;
-
-    // I have to print in this file
-    // print |name| is added to blank when we add sometihng to a hashTable
-    // print if we double size of hash
-
-    // remove
-    // print if key is found and removed or not found
 
     /**
      * General constructor for CP
@@ -101,7 +90,7 @@ public class CommandProcessor implements Interpreter {
                         break;
                     case "song":
                         controller.removeSong(output, name);
-                        break; 
+                        break;
                 }
                 break;
 

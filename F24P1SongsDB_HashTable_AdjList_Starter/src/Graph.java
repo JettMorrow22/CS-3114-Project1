@@ -250,7 +250,7 @@ public class Graph {
             if (vertex[i] == null) {
                 visited[i] = true;
             }
-            
+
             if (!visited[i]) // if node is part of graph
             { // and not visited
 

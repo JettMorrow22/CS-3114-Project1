@@ -106,7 +106,7 @@ public class Controller {
      */
     public void removeArtist(PrintWriter output, String artist) {
         // HASH
-        Record record = artists.remove(artist); 
+        Record record = artists.remove(artist);
         if (record != null) {
             output.println("|" + artist
                 + "| is removed from the Artist database.");

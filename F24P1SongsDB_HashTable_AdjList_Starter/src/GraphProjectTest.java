@@ -10,7 +10,6 @@ import java.nio.file.Paths;
  * @version jettmorrow & adams03
  */
 public class GraphProjectTest extends TestCase {
-    // ----------------------------------------------------------
     /**
      * Read contents of a file into a string
      * 

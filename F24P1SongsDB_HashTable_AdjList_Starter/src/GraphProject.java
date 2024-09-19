@@ -80,25 +80,5 @@ public class GraphProject {
             e.printStackTrace();
         }
 
-        // initalize controller and commandProcessor with the file
-
-        // Okay steps to project
-        // 1: GraphProject
-        // 2: CommandProcessor
-        // 3:
-
-        // we first make GraphProject which initializes controller &&
-        // CommandProcessor(CP)
-        // Controller has two hash tables and a graph
-        // CP has command files and controller in constructor
-        // CP reads line by line calling methods in controller
-        // controller then implements those methods with the hashtables and
-        // graph
-
-        // HashTable: uses sFold with quadratic probing, doubles size once at
-        // 50%
-        // has Record[] where a record has a Key(artist name or song) and
-        // Node(for Graph)
-        //
     }
 }

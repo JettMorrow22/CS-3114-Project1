@@ -16,9 +16,6 @@ public class CommandProcessorTest extends TestCase {
     private Scanner scanner;
     private PrintWriter printer;
 
-    // ~ Constructors ..........................................................
-
-    // ~Public Methods ........................................................
     /**
      * setUp method for the test class
      */

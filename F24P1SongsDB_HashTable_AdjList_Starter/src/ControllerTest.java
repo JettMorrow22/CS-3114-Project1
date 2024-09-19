@@ -9,13 +9,11 @@ import java.io.StringWriter;
  * @version jettmorrow & adams03
  */
 public class ControllerTest extends TestCase {
-    // ~ Fields ................................................................
+
     private Controller controller;
     private PrintWriter printer;
     private StringWriter writer;
-    // ~ Constructors ..........................................................
 
-    // ~Public Methods ........................................................
     /**
      * setUp method for the test class
      */
@@ -39,8 +37,8 @@ public class ControllerTest extends TestCase {
 
         // should get resized
         controller.insert(printer, "Artist2", "Song2");
-        //output = writer.toString();
-        //assertTrue(output.contains("Song hash table size doubled."));
+        // output = writer.toString();
+        // assertTrue(output.contains("Song hash table size doubled."));
 
         // add a duplicate
         controller.insert(printer, "Artist1", "Song1");
@@ -56,12 +54,11 @@ public class ControllerTest extends TestCase {
     /**
      * test case for removeArtist method
      */
-    public void testRemoveArtist() 
-    {
+    public void testRemoveArtist() {
 
         controller.insert(printer, "treaty", "stop and stare");
         controller.removeSong(printer, "treaty");
-        
+
     }
 
 
@@ -75,7 +72,6 @@ public class ControllerTest extends TestCase {
         controller.removeArtist(printer, "jett");
 
     }
-    
 
 
     /**
@@ -85,13 +81,5 @@ public class ControllerTest extends TestCase {
         controller.printArtist(printer);
         controller.insert(printer, "treaty", "stop and stare");
         controller.printArtist(printer);
-    }
-
-
-    /**
-     * test case for printSong method
-     */
-    public void testPrintSong() {
-        // fully tested in GraphProjectTest
     }
 }

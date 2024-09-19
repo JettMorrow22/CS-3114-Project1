@@ -13,7 +13,6 @@ public class Graph {
     private int[] parent;
     private int[] weight;
 
-    // keep track of the freed spots, but how
 
     /**
      * basic constructor for graph

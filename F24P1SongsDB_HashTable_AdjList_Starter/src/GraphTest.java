@@ -80,6 +80,9 @@ public class GraphTest extends TestCase {
 
     }
     
+    /**
+     * method for testing connected components after removal
+     */
     public void testConnected() {
         graph.addNode();
         graph.addNode();

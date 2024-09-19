@@ -10,6 +10,8 @@ public class Graph {
     private int numberOfNodes;
     private int[] freeSpots;
     private int freeSpotIndex;
+    private int[] parent;
+    private int[] weight;
 
     // keep track of the freed spots, but how
 
@@ -24,6 +26,14 @@ public class Graph {
             freeSpots[x] = -1;
         }
         freeSpotIndex = 0;
+        
+        //create the array for the parents and assign each a weight of 0
+        parent = new int[50];
+        weight = new int[50];
+        for (int i = 0; i < 50; i++) {
+            parent[i] = -1; // each node is set to no parent
+            weight[i] = 1;   // initial weight is 1
+        }
     }
 
 
@@ -208,9 +218,53 @@ public class Graph {
 
     }
 
-    // print
-    // union
-    // connectedCompopent
+    /**
+     * union method, aims to combine two disjoint graphs if they have
+     * different parent methods
+     * @param a one of the nodes we are using
+     * @param b the other node we are using
+     */
+    public void union(int a, int b)
+    {
+        //we need to use the find method to determine if the nodes
+        //are in the same graph or not
+        //if they are, do nothing - if they aren't, combine them
+        int root1 = find(a);
+        int root2 = find(b);
+        if (root1 != root2)
+            {
+            if (weight[root2] > weight[root1]) {
+                parent[root1] = root2;
+                weight[root2] += weight[root1];
+              } else {
+                parent[root2] = root1;
+                weight[root1] += weight[root2];
+              }
+            }
+    }
+    /**
+     * find method for a node, we want to return the root of the node
+     * @param node the node we are finding the root of
+     * @return the root of the node
+     */
+    public int find(int node)
+    {
+        if (parent[node] == -1)
+        {
+            return node;
+        }
+        parent[node] = find(parent[node]);
+        return parent[node];
+    }
+    /**
+     * print method
+     * @param title the name of whatever we want to print
+     */
+    public void print(String title)
+    {
+        //print either the list of artists, list of songs, or the graph
+    }
+    // connectedComponent
     // diameter
 
 }
